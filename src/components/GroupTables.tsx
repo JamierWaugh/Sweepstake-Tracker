@@ -35,8 +35,6 @@ function GroupTables({group, sweepstake} : GroupTables){
                     return teamB.gf - teamA.gf;
                 })
             }
-        
-
             setEnrichedStandings(enriched)
         }
         fetchStandings();
