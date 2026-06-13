@@ -6,9 +6,9 @@ function Groups(){
     return (
         <>
         <GroupTables group="A" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
+        <GroupTables group="B" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
         <GroupTables group="C" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
         <GroupTables group="D" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
-        <GroupTables group="B" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
         <GroupTables group="E" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
         <GroupTables group="F" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
         <GroupTables group="G" sweepstake={(sweepstakeData as unknown) as SweepstakeType}/>
