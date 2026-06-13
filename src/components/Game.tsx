@@ -29,8 +29,8 @@ interface GameProps {
 }
 
 function Game({gameParsed}: GameProps){
-    const homeTeamOwner = getOwnerByTeam(sweepstake, gameParsed.homeTeamId)[1];
-    const awayTeamOwner = getOwnerByTeam(sweepstake, gameParsed.awayTeamId)[1];
+    const homeTeamOwner = getOwnerByTeam(sweepstake, gameParsed.homeTeamId)?.[1] || "No Owner";
+    const awayTeamOwner = getOwnerByTeam(sweepstake, gameParsed.awayTeamId)?.[1] || "No Owner";
     const parsedDate = parseLocalDateToUKDate(gameParsed.stadiumRegion, gameParsed.localDate);
 
     //Return a bool for whether the game is live or not

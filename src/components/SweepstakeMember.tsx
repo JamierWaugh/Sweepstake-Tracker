@@ -8,10 +8,12 @@ interface MemberName {
 
 function FamilyMember({name}: MemberName){
 
-    let team1 = sweepstake[name][0].teamName;
-    let team2 = sweepstake[name][1].teamName;
-    let team3 = sweepstake[name][2].teamName;
-    let team4 = sweepstake[name][3].teamName;
+    const sweepstakeData = sweepstake as Record<string, Array<{ teamId: string; teamName: string}>>;
+    const memberTeams = sweepstakeData[name] || [];
+    let team1 = memberTeams[0]?.teamName || "TBD";
+    let team2 = memberTeams[1]?.teamName || "TBD";
+    let team3 = memberTeams[2]?.teamName || "TBD";
+    let team4 = memberTeams[3]?.teamName || "TBD";
 
     return (<>
         <div className="family-card"> 
