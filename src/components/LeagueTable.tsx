@@ -30,7 +30,7 @@ function LeagueTable({table} : LeagueTableProps){
             </thead>
             <tbody>
                 {table.map((player, index) => {
-                    const rankClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : index === 11 ? "wooden" : "normal";
+                    const rankClass = index === 0 ? "gold" : index === 1 ? "silver" : index === 2 ? "bronze" : index === table.length - 1 ? "wooden" : "normal";
                     
                     return (
                     <tr key={player.playerName}>
