@@ -1,0 +1,103 @@
+import getOwnerByTeam from "../utils/GetOwnerByTeamHelper"
+import sweepstake from "../data/sweepstake.json"
+import parseLocalDateToUKDate from "../utils/ParseLocalToUKHelper"
+import parseScorersString from "../utils/ParseScorersStringHelper"
+import "./Game.css"; 
+
+export interface CleanedGame{
+    id: string,
+    isFinished: boolean,
+    timeElapsed: string,
+    homeScore: string,
+    awayScore: string,
+    homeTeamId: string,
+    awayTeamId: string,
+    homeTeamName: string,
+    awayTeamName: string,
+    homeScorers: string,
+    awayScorers: string,
+    stadiumName: string,
+    stadiumRegion: string,
+    group: string,
+    localDate: string,
+}
+
+
+
+interface GameProps {
+    gameParsed: CleanedGame;
+}
+
+function Game({gameParsed}: GameProps){
+    const homeTeamOwner = getOwnerByTeam(sweepstake, gameParsed.homeTeamId)[1];
+    const awayTeamOwner = getOwnerByTeam(sweepstake, gameParsed.awayTeamId)[1];
+    const parsedDate = parseLocalDateToUKDate(gameParsed.stadiumRegion, gameParsed.localDate);
+
+    //Return a bool for whether the game is live or not
+    const isLive = gameParsed.timeElapsed !== "notstarted" && gameParsed.timeElapsed !== "finished"; 
+
+    //Parse raw strings into arrays of clean lines
+    const homeScorersList = parseScorersString(gameParsed.homeScorers);
+    const awayScorersList = parseScorersString(gameParsed.awayScorers);
+    const hasScorers = homeScorersList.length > 0 || awayScorersList.length > 0;
+
+    return (
+        <li className="card">
+        <div className="header">
+            <span className="group-badge"> GROUP {gameParsed.group}</span>
+            <span className="date-text"> KICKOFF {parsedDate}</span>
+        </div>
+
+        <div className="scoreboard">
+            {/* Home Team */}
+            <div className="team-cluster-left">
+                <span className="owner-text"> {homeTeamOwner}</span>
+                <span className="team-name"> {gameParsed.homeTeamName} </span>
+            </div>
+
+            {/* Match Status */}
+            <div className="center-section"> 
+                <span className="score"> {gameParsed.homeScore} </span>
+                <div className="status-wrapper">
+                {isLive ? (
+                    <span className="live-badge"> LIVE {gameParsed.timeElapsed} </span>
+                ) : gameParsed.isFinished === true ? (
+                    <span className="ft-badge"> FT </span>
+                ) : (
+                <span className="vs-badge"> VS </span>) 
+                }
+                </div>
+                <span className="score"> {gameParsed.awayScore} </span>
+            </div>
+
+            {/*Away Team */}
+            <div className="team-cluster-right">
+                <span className="owner-text">  {awayTeamOwner} </span>
+                <span className="team-name"> {gameParsed.awayTeamName} </span>
+            </div>  
+        </div>
+
+        <div className="stadium-footer">
+            Stadium: {gameParsed.stadiumName}
+        </div>
+
+        {/* Goalscorer strings */}
+        {hasScorers && (
+            <div className="scorers-section">
+                <div className="scorers-left">
+                    {homeScorersList.map((scorer,idx) => (
+                        <div key={idx} className="scorer-line"> {scorer} </div>
+                    ))}
+                </div>
+                <div className="scorers-right"> 
+                    {awayScorersList.map((scorer, idx) => (
+                    <div key={idx} className="scorer-line"> {scorer} </div> 
+                    ))}
+                </div>
+            </div>
+        )}
+        </li>
+    )
+}
+
+export default Game;

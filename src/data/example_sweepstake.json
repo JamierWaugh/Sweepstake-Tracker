@@ -1,0 +1,14 @@
+{
+  "User1": [
+    { "teamId": "43", "teamName": "Uzbekistan" },
+    { "teamId": "23", "teamName": "Sweden" },
+    { "teamId": "17", "teamName": "Germany" },
+    { "teamId": "46", "teamName": "Croatia" }
+  ],
+  "User2": [
+    { "teamId": "40", "teamName": "Jordan" },
+    { "teamId": "38", "teamName": "Algeria" },
+    { "teamId": "25", "teamName": "Belgium" },
+    { "teamId": "29", "teamName": "Spain" }
+  ]
+}

@@ -1,0 +1,67 @@
+/* Container Card for each Family Member */
+.family-card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid #2e2e2e;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 450px; /* Keeps the profile cards sleek and proportional */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header styling for the Member's Name */
+.family-name {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 2px solid #2a6bf2; /* Blue accent line beneath their name */
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+/* Ordered List Wrapper */
+.team-list {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Removes default clunky browser numbers */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Even spacing between entries */
+}
+
+/* Individual Team Rows */
+.team-item {
+    background-color: #262626;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border: 1px solid #333333;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Subtle hover pop effect when checking out their teams */
+.team-item:hover {
+    transform: translateX(4px);
+    border-color: #2a6bf2;
+}
+
+/* Specific styling for tracking slots manually instead of CSS counters if preferred */
+.team-slot-badge {
+    color: #00ca72;
+    font-weight: 700;
+    margin-right: 0.75rem;
+    background: #333333;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}

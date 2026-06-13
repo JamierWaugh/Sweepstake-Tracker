@@ -1,0 +1,122 @@
+/* Container Wrapper Layout */
+.table-container {
+    width: 100%;
+    margin: 2rem auto;
+    max-width: 650px; /* Snugger grid container lane */
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Group Section Heading Title */
+.group-title {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Master Grid Structure Base */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2e2e2e;
+    table-layout: fixed; /*Stops columns from resizing fluidly based on names */
+}
+
+/* Shared cell styling defaults */
+.standings-table th, 
+.standings-table td {
+    padding: 10px 4px; /* Tight padding to allow everything to fit horizontally */
+    font-size: 0.85rem;
+    text-align: center; /* Numerical items drop right into the column centers */
+    border-bottom: 1px solid #2e2e2e;
+}
+
+/* Text alignment overrides */
+.standings-table .text-left {
+    text-align: left;
+    padding-left: 8px;
+}
+
+/* Global Headers Configuration */
+.standings-table th {
+    background-color: #2a6bf2;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Highlighting Name/Owner Weights */
+.standings-table td.font-bold {
+    font-weight: 600;
+}
+
+/* Handle Team Text Overflows cleanly inside fixed columns */
+.standings-table td.team-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." automatically if a country name is too long */
+}
+
+/* Special High-contrast Highlights for Total Points Column */
+.standings-table th.pts-header {
+    background-color: #1b51c4; /* Distinct blue shade for total column */
+}
+.standings-table td.pts-cell {
+    font-weight: 700;
+    color: #00ca72; /* Manager green accent highlights */
+}
+
+.standings-table tbody tr:hover {
+    background-color: #252525;
+}
+
+/* RIGID COLUMN TRACK DEFINITIONS (Adds up exactly to 100%) */
+.standings-table th:nth-child(1), .standings-table td:nth-child(1) { width: 18%; } /* Owner Name */
+.standings-table th:nth-child(2), .standings-table td:nth-child(2) { width: 26%; } /* Team Name */
+.standings-table th:nth-child(3), .standings-table td:nth-child(3) { width: 7%; }  /* MP */
+.standings-table th:nth-child(4), .standings-table td:nth-child(4) { width: 7%; }  /* W */
+.standings-table th:nth-child(5), .standings-table td:nth-child(5) { width: 7%; }  /* D */
+.standings-table th:nth-child(6), .standings-table td:nth-child(6) { width: 7%; }  /* L */
+.standings-table th:nth-child(7), .standings-table td:nth-child(7) { width: 7%; }  /* GF */
+.standings-table th:nth-child(8), .standings-table td:nth-child(8) { width: 7%; }  /* GA */
+.standings-table th:nth-child(9), .standings-table td:nth-child(9) { width: 7%; }  /* GD */
+.standings-table th:nth-child(10), .standings-table td:nth-child(10) { width: 11%; } /* Pts */
+
+
+/* SQUISHED RESPONSIVE RULES FOR SMALLER PHONE SCREENS (< 480px) */
+@media screen and (max-width: 480px) {
+    .table-container {
+        padding: 0 0.25rem;
+    }
+    
+    .group-title {
+        font-size: 1.1rem;
+        margin-left: 4px;
+    }
+
+    /* Micro-scale the font sizing so all 10 columns fit natively side-by-side */
+    .standings-table th, 
+    .standings-table td {
+        font-size: 0.72rem;
+        padding: 8px 2px;
+    }
+
+    .standings-table .text-left {
+        padding-left: 4px;
+    }
+
+    /* Adjust column widths on mobile to give stats a tiny bit more room over names */
+    .standings-table th:nth-child(1), .standings-table td:nth-child(1) { width: 17%; } /* Owner */
+    .standings-table th:nth-child(2), .standings-table td:nth-child(2) { width: 23%; } /* Team Name */
+    .standings-table th:nth-child(10), .standings-table td:nth-child(10) { width: 12%; } /* Points column */
+}

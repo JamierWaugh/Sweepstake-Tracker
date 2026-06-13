@@ -1,0 +1,227 @@
+/* Container Match Card */
+.card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2e2e2e;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Center Layout Controls */
+    width: 100%;           /* Full width of the content lane */
+    max-width: 550px;      /* Perfect layout width for readability */
+    box-sizing: border-box; /* Prevents padding from creating horizontal scrolling */
+}
+
+/* Header Row (Group & Time) */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2e2e2e;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.group-badge {
+    background-color: #2a6bf2;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.date-text {
+    font-size: 0.85rem;
+    color: #aaaaaa;
+    font-weight: 500;
+}
+
+/* Main Scoreboard Layout Grid */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.75rem 0;
+    align-items: flex-start;
+}
+
+/* Teams Layouts */
+.team-cluster-left {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    text-align: left;
+}
+
+.team-cluster-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 2;
+    text-align: right;
+}
+
+.team-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.owner-text {
+    font-size: 0.85rem;
+    color: #00ca72; /* Accent green for managers */
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+/* Clock and Center Status Section */
+.center-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 3;
+    gap: 1rem;
+}
+
+.score {
+    font-size: 1.75rem;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    color: #ffffff;
+    min-width: 1.5rem;
+    text-align: center;
+}
+
+.status-wrapper {
+    min-width: 5.5rem;
+    text-align: center;
+}
+
+/* Interactive Status Badges */
+.live-badge {
+    background-color: #e53935;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.ft-badge {
+    background-color: #3a3a3a;
+    color: #b0b0b0;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.vs-badge {
+    color: #666666;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Stadium Details Footer */
+.stadium-footer {
+    font-size: 0.8rem;
+    color: #666666;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Goalscorers Grid Section */
+.scorers-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #2e2e2e;
+    font-size: 0.8rem;
+    color: #888888;
+}
+
+.scorers-left {
+    flex: 1;
+    text-align: left;
+}
+
+.ball-icon {
+    padding: 0 10px;
+    opacity: 0.3;
+}
+
+.scorers-right {
+    flex: 1;
+    text-align: right;
+}
+
+.scorer-line {
+    line-height: 1.4;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+}
+
+/* 📱 MOBILE OVERRIDES FOR MATCH CARDS (< 480px) */
+@media screen and (max-width: 480px) {
+    .card {
+        padding: 1rem; 
+    }
+
+    .date-text {
+        font-size: 0.75rem;
+    }
+
+    .team-name {
+        font-size: 0.95rem; 
+        word-break: break-word;
+    }
+
+    .owner-text {
+        font-size: 0.75rem;
+    }
+
+    .center-section {
+        gap: 0.4rem;
+        flex: 2; /* Give more relative space to country text lines */
+    }
+
+    .score {
+        font-size: 1.4rem;
+        min-width: 1rem;
+    }
+
+    .status-wrapper {
+        min-width: 4rem;
+    }
+
+    .live-badge, .ft-badge, .vs-badge {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+    }
+
+    .scorer-line {
+        font-size: 0.72rem;
+    }
+}
+
+/* PARENT LIST WRAPPER CLEANER 
+   (Forces lists to stay perfectly aligned down center axis and bans side-scrolling) */
+.games-list-wrapper, ul {
+    padding: 0 !important;   
+    margin: 0 auto;          
+    width: 100%;
+    max-width: 550px;        
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    overflow-x: hidden;      
+}
