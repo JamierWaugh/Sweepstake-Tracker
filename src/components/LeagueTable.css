@@ -1,0 +1,128 @@
+/* Card Container */
+.league-container {
+    background-color: #1e1e1e;
+    border: 1px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 12px 8px; /* Tight padding for maximum mobile breathing room */
+    max-width: 650px;
+    margin: 1rem auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    font-family: system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.league-title {
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 4px 0 12px 6px;
+    letter-spacing: 0.3px;
+}
+
+/* Hardened Layout Mechanics */
+.custom-league-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /*Forces columns to obey the defined % widths below */
+}
+
+/* Dynamic Width Tracks (Adds up to exactly 100%) */
+.col-rank   { width: 12%; text-align: center; } /* Compact positioning */
+.col-player { width: 37%; text-align: left; }   /* Keeps names visible */
+.col-stat   { width: 12%; text-align: center; } /* Equal tracks for P, GD, GF */
+.col-pts    { width: 15%; text-align: center; } /* Prominent points area */
+
+/* Global Cell Defaults */
+.custom-league-table th,
+.custom-league-table td {
+    padding: 10px 4px; /* Shrunk padding to eliminate horizontal scroll wraps */
+    font-size: 0.8rem; /* Micro-scaled for 360px wide screens */
+    color: #e0e0e0;
+    border-bottom: 1px solid #262626;
+    box-sizing: border-box;
+}
+
+.custom-league-table th {
+    background-color: #262626;
+    color: #aaaaaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+}
+
+/* Helpers */
+.text-left { text-align: left !important; }
+.font-semibold { font-weight: 600; }
+
+/* Keep vertical numbers aligned and clean */
+.numeric-data {
+    font-variant-numeric: tabular-nums;
+    color: #cccccc;
+}
+
+/* Text Overrun Prevention */
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Gracefully shortens names that are too long */
+}
+
+/* High-Contrast Ranking System */
+.rank-medallion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.gold   { background-color: #fbbf24; color: #78350f; }
+.silver { background-color: #94a3b8; color: #1e293b; }
+.bronze { background-color: #cd7f32; color: #ffffff; }
+.normal { background-color: rgba(255, 255, 255, 0.05); color: #888888; }
+.wooden {background-color: #dc2626; color: #ffffff;}
+
+/* Visual Accent Colors */
+.pos-green { color: #4ade80 !important; font-weight: 600; }
+.neg-red   { color: #f87171 !important; }
+
+/* Total Points Column Accents */
+.total-pts-cell {
+    font-weight: 700;
+    color: #00ca72 !important; /* Standout highlight color */
+    background-color: rgba(0, 202, 114, 0.04); /* Soft target highlight column */
+}
+
+@media screen and (min-width: 480px) {
+    .league-container {
+        padding: 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .league-title {
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .custom-league-table th,
+    .custom-league-table td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+
+    .custom-league-table th {
+        font-size: 0.75rem;
+    }
+
+    .rank-medallion {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+}
