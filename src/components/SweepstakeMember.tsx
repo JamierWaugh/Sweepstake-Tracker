@@ -6,7 +6,7 @@ interface MemberName {
 }
 
 
-function FamilyMember({name}: MemberName){
+function OwnerMember({name}: MemberName){
 
     const sweepstakeData = sweepstake as Record<string, Array<{ teamId: string; teamName: string}>>;
     const memberTeams = sweepstakeData[name] || [];
@@ -16,8 +16,8 @@ function FamilyMember({name}: MemberName){
     let team4 = memberTeams[3]?.teamName || "TBD";
 
     return (<>
-        <div className="family-card"> 
-            <h2 className="family-name">
+        <div className="owner-card"> 
+            <h2 className="owner-name">
             {name}:
             </h2>
             <ol className="team-list">
@@ -39,4 +39,4 @@ function FamilyMember({name}: MemberName){
     )
 }
 
-export default FamilyMember
+export default OwnerMember

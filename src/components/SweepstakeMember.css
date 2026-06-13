@@ -1,5 +1,5 @@
-/* Container Card for each Family Member */
-.family-card {
+/* Container Card for each Owner Member */
+.owner-card {
     background-color: #1e1e1e;
     color: #ffffff;
     border-radius: 12px;
@@ -14,7 +14,7 @@
 }
 
 /* Header styling for the Member's Name */
-.family-name {
+.owner-name {
     margin-top: 0;
     margin-bottom: 1.25rem;
     font-size: 1.4rem;

@@ -1,20 +1,18 @@
-import SweepstakeMember from '../components/SweepstakeMember.tsx'
+import OwnerMember from '../components/SweepstakeMember.tsx';
+import sweepstake from "../data/sweepstake.json";
 function Home(){
+
+    const ownerNames = Object.keys(sweepstake);
     return (
         <>
-        <div>
-            <SweepstakeMember name="Connor"/>
-            <SweepstakeMember name="Dan"/>
-            <SweepstakeMember name="Gem"/>
-            <SweepstakeMember name="Grandad"/>
-            <SweepstakeMember name="Grandma"/>
-            <SweepstakeMember name="Jamie"/>
-            <SweepstakeMember name="Jess"/>
-            <SweepstakeMember name="Lorna"/>
-            <SweepstakeMember name="Margaret"/>
-            <SweepstakeMember name="Martin"/>
-            <SweepstakeMember name="Phil"/>
-            <SweepstakeMember name="Sarah"/>
+        <div className="dashboard-container">
+            <div className="members-grid">
+                {ownerNames.map((ownerName) => (
+                    <OwnerMember key={ownerName}
+                    name={ownerName} 
+                    />
+                ))}
+            </div>
         </div>
         </>
     )
