@@ -1,20 +1,20 @@
-import FamilyMember from '../components/FamilyMember.tsx'
+import SweepstakeMember from '../components/SweepstakeMember.tsx'
 function Home(){
     return (
         <>
         <div>
-            <FamilyMember name="Connor"/>
-            <FamilyMember name="Dan"/>
-            <FamilyMember name="Gem"/>
-            <FamilyMember name="Grandad"/>
-            <FamilyMember name="Grandma"/>
-            <FamilyMember name="Jamie"/>
-            <FamilyMember name="Jess"/>
-            <FamilyMember name="Lorna"/>
-            <FamilyMember name="Margaret"/>
-            <FamilyMember name="Martin"/>
-            <FamilyMember name="Phil"/>
-            <FamilyMember name="Sarah"/>
+            <SweepstakeMember name="Connor"/>
+            <SweepstakeMember name="Dan"/>
+            <SweepstakeMember name="Gem"/>
+            <SweepstakeMember name="Grandad"/>
+            <SweepstakeMember name="Grandma"/>
+            <SweepstakeMember name="Jamie"/>
+            <SweepstakeMember name="Jess"/>
+            <SweepstakeMember name="Lorna"/>
+            <SweepstakeMember name="Margaret"/>
+            <SweepstakeMember name="Martin"/>
+            <SweepstakeMember name="Phil"/>
+            <SweepstakeMember name="Sarah"/>
         </div>
         </>
     )

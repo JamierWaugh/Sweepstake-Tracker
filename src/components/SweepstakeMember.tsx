@@ -1,12 +1,12 @@
 import sweepstake from "../data/sweepstake.json"
-import "./FamilyMember.css"
+import "./SweepstakeMember.css"
 
-interface FamilyName {
+interface MemberName {
     name: string
 }
 
 
-function FamilyMember({name}: FamilyName){
+function FamilyMember({name}: MemberName){
 
     let team1 = sweepstake[name][0].teamName;
     let team2 = sweepstake[name][1].teamName;

@@ -1,4 +1,4 @@
-import getOwnerByTeam from "../utils/GetOwnerByTeamHelper.tsx"
+import getOwnerByTeam from "./GetOwnerByTeamHelper.tsx"
 
 interface StandingRow{
     team_id: string,

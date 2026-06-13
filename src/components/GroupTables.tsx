@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import enrichStandings, {type EnrichedStandingRows} from "./EnrichStandings.tsx";
+import enrichStandings, {type EnrichedStandingRows} from "../utils/EnrichStandingsHelper.tsx";
 import "./GroupTables.css";
 
 interface GroupTables{

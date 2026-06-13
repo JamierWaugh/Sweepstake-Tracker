@@ -5,7 +5,7 @@ function NavBar(){
     return (
         <>
         <nav className="navbar">
-            <div className="nav-brand"> Ilkley Waugh World Cup Sweepstake</div>
+            <div className="nav-brand"> World Cup Sweepstake Tracker</div>
             <ul className="nav-list"> 
                 <li>
                     <NavLink to="/" className="nav-link">Home </NavLink>
