@@ -10,11 +10,12 @@ async function fetchGameDisplay(){
     const stadiumData = await stadiumResponse.json();
 
     //Look up stadium data
-    const stadiumLookup: Record<string, {name: string; region: string}> = {};
+    const stadiumLookup: Record<string, {name: string; region: string, city: string}> = {};
     stadiumData.stadiums.forEach((stadium: any) => {
         stadiumLookup[stadium.id] = {
             name: stadium.name_en,
-            region: stadium.region
+            region: stadium.region,
+            city: stadium.city_en
         };
     })
 
@@ -33,9 +34,13 @@ async function fetchGameDisplay(){
             awayScorers: game.away_scorers,
             stadiumName: stadiumLookup[game.stadium_id].name || "Unknown Stadium",
             stadiumRegion: stadiumLookup[game.stadium_id].region,
+            stadiumCity: stadiumLookup[game.stadium_id].city,
             group: game.group,
             localDate: game.local_date 
-        }));
+        }))
+        .sort((a: any, b: any) => {
+            return new Date(a.localDate).getTime() - new Date(b.localDate).getTime();
+        })
         const recent = cleanGames
             .filter((game: any) => game.isFinished)
             .reverse()

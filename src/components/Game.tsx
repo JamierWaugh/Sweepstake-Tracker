@@ -18,6 +18,7 @@ export interface CleanedGame{
     awayScorers: string,
     stadiumName: string,
     stadiumRegion: string,
+    stadiumCity: string,
     group: string,
     localDate: string,
 }
@@ -78,7 +79,7 @@ function Game({gameParsed}: GameProps){
         </div>
 
         <div className="stadium-footer">
-            Stadium: {gameParsed.stadiumName}
+            {gameParsed.stadiumName}, {gameParsed.stadiumCity}
         </div>
 
         {/* Goalscorer strings */}

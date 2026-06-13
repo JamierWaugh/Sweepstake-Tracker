@@ -17,8 +17,26 @@ function GroupTables({group, sweepstake} : GroupTables){
         async function fetchStandings() {
             const response = await fetch(`https://worldcup26.ir/get/group?name=${group}`);
             const groupStandings = await response.json();
-            console.log(groupStandings);
             const enriched = enrichStandings(groupStandings.group, sweepstake);
+
+            if (enriched && enriched.teams){
+                enriched.teams.sort((teamA: any, teamB: any) => {
+                    //Sort by points
+                    if (teamB.pts !== teamA.pts){
+                        return teamB.pts - teamA.pts;
+                    }
+
+                    //Sort by Goal Difference if points are tied
+                    if (teamB.gd !== teamA.gd) {
+                        return teamB.gd - teamA.gd;
+                    }
+
+                    //If points and goal difference are tied, sort by goals for
+                    return teamB.gf - teamA.gf;
+                })
+            }
+        
+
             setEnrichedStandings(enriched)
         }
         fetchStandings();
