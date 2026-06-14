@@ -13,7 +13,7 @@ function League(){
                 const response = await fetch(`https://worldcup26.ir/get/groups`);
                 const data = await response.json();
 
-                const ownerLookup: Record<string, {pts: number; gd: number; gf: number; played: number}> = {};
+                const ownerLookup: Record<string, {pts: number; w: number, d: number, l: number, gd: number; gf: number; played: number}> = {};
 
                 //Get team_id, pts, gd, and gf for all teams in every group.
                 data.groups.forEach((groupData: any) => {
@@ -27,6 +27,9 @@ function League(){
                             if (!ownerLookup[ownerName]){
                                 ownerLookup[ownerName] = {
                                     pts: 0,
+                                    w: 0,
+                                    d: 0,
+                                    l: 0,
                                     gd: 0,
                                     gf: 0,
                                     played: 0
@@ -34,6 +37,9 @@ function League(){
                             }
                             //Sum pts and goals for each player.
                             ownerLookup[ownerName].pts += Number(team.pts) || 0;
+                            ownerLookup[ownerName].w += Number(team.w) || 0;
+                            ownerLookup[ownerName].d += Number(team.d) || 0;
+                            ownerLookup[ownerName].l += Number(team.l) || 0;
                             ownerLookup[ownerName].gd += Number(team.gd) || 0;
                             ownerLookup[ownerName].gf += Number(team.gf) || 0;
                             ownerLookup[ownerName].played += Number(team.mp) || 0;
@@ -44,6 +50,9 @@ function League(){
                 const finalLeague = Object.keys(ownerLookup).map(name => ({
                     playerName: name,
                     totalPoints: ownerLookup[name].pts,
+                    totalW: ownerLookup[name].w,
+                    totalD: ownerLookup[name].d,
+                    totalL: ownerLookup[name].l,
                     totalGD: ownerLookup[name].gd,
                     totalGF: ownerLookup[name].gf,
                     totalPlayed: ownerLookup[name].played

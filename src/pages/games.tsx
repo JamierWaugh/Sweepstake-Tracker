@@ -1,8 +1,10 @@
 import Game, { type CleanedGame } from "../components/Game.tsx"
 import {useState, useEffect } from 'react';
 import parseLocalDateToUKDate from "../utils/ParseLocalToUKHelper"
+import sweepstake from "../data/sweepstake.json";
+import getOwnerByTeam from "../utils/GetOwnerByTeamHelper"
 
-async function fetchGameDisplay(){
+export async function fetchGameDisplay(){
     const [gameResponse, stadiumResponse] = await Promise.all([
         fetch("https://worldcup26.ir/get/games"),
         fetch("https://worldcup26.ir/get/stadiums")
@@ -29,37 +31,20 @@ async function fetchGameDisplay(){
             awayScore: game.away_score,
             homeTeamId: game.home_team_id,
             awayTeamId: game.away_team_id,
-            homeTeamName: game.home_team_name_en,
-            awayTeamName: game.away_team_name_en,
+            homeTeamName: game.home_team_name_en || game.home_team_label || "Unknown Team",
+            awayTeamName: game.away_team_name_en || game.away_team_label || "Unknown Team",
             homeScorers: game.home_scorers,
             awayScorers: game.away_scorers,
             stadiumName: stadiumLookup[game.stadium_id].name || "Unknown Stadium",
             stadiumRegion: stadiumLookup[game.stadium_id].region,
             stadiumCity: stadiumLookup[game.stadium_id].city,
             group: game.group,
-            parsedDate: parseLocalDateToUKDate(stadiumLookup[game.stadium_id].region, game.local_date)
+            parsedDate: parseLocalDateToUKDate(stadiumLookup[game.stadium_id].region, game.local_date),
+            homeTeamOwner: getOwnerByTeam(sweepstake, game.home_team_id)?.[1] || "No Owner",
+            awayTeamOwner: getOwnerByTeam(sweepstake, game.away_team_id)?.[1] || "No Owner",
+            isLive: game.time_elapsed !== "notstarted" && game.time_elapsed !== "finished"
         }))
-        .sort((a: any, b: any) => {
-            return a.parsedDate.date.getTime() - b.parsedDate.date.getTime();
-        })
-        const recent = cleanGames
-            .filter((game: any) => game.isFinished)
-            .reverse()
-            .slice(0,4)
-            .reverse();
-        let upcoming = cleanGames
-            .filter((game: any) => !game.isFinished)
-        if (upcoming.length < 8 ){
-            upcoming = upcoming.slice(0,upcoming.length);
-        } else{
-            upcoming = upcoming.slice(0,8);
-        }
-            
-        
-        
-        const combinedTimeLine = [...recent, ...upcoming]; //... is a spread operation to unpack an array or object
-
-    return combinedTimeLine;
+    return cleanGames;
 }
 
 function Games(){
@@ -71,8 +56,26 @@ function Games(){
     useEffect(() => {
         async function loadData(){
             try {
-                const nextGames = await fetchGameDisplay();
-                setGames(nextGames);
+                const cleanGames = await fetchGameDisplay();
+                cleanGames.sort((a: any, b: any) => {
+                    return a.parsedDate.date.getTime() - b.parsedDate.date.getTime();
+                })
+                const recent = cleanGames
+                    .filter((game: any) => game.isFinished)
+                    .reverse()
+                    .slice(0,4)
+                    .reverse();
+                let upcoming = cleanGames
+                    .filter((game: any) => !game.isFinished)
+                if (upcoming.length < 8 ){
+                    upcoming = upcoming.slice(0,upcoming.length);
+                } else{
+                    upcoming = upcoming.slice(0,8);
+                }
+
+            const nextGames = [...recent, ...upcoming]; //... is a spread operation to unpack an array or object
+                
+            setGames(nextGames);
             } catch (error){
                 console.error("Error loading matches:", error);
             } finally {

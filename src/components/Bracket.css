@@ -1,0 +1,50 @@
+/* --- Master Horizontal Canvas --- */
+.bracket-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 3rem; /* Clean horizontal channel space between your round columns */
+  padding: 4rem 2rem;
+  background-color: #0b0f19;
+  min-height: 100vh;
+  align-items: flex-start; /* Aligns all column headers neatly to the top track */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Clean, Independent Descending Columns --- */
+.round-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0px; /* Let your cards rely entirely on their native margin-bottom from game.css */
+  width: max-content;
+  min-width: 240px; /* Safe minimum width to prevent text squishing */
+  flex-shrink: 0;
+}
+
+.round-title {
+  text-align: center;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 700;
+  margin-bottom: 1rem; /* Clean breathing room below the round name */
+}
+
+/* --- The Pure Card Wrapper --- */
+.game-card-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Typography Protection Engine */
+.game-card-wrapper * {
+  white-space: nowrap !important; /* Ensures team text lines stay clean and unbroken */
+}
+
+/* 📱 MOBILE VIEW COMPACTNESS OVERRIDES */
+@media screen and (max-width: 480px) {
+  .bracket-wrapper {
+    gap: 1.5rem;
+    padding: 3rem 1rem;
+  }
+}

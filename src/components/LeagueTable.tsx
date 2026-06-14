@@ -3,6 +3,9 @@ import "./LeagueTable.css";
 export interface PlayerRow {
     playerName: string;
     totalPlayed: number;
+    totalW: number;
+    totalD: number;
+    totalL: number;
     totalGD: number;
     totalGF: number;
     totalPoints: number;
@@ -23,6 +26,9 @@ function LeagueTable({table} : LeagueTableProps){
                     <th className="col-rank">Pos</th>
                     <th className="col-player">Player</th>
                     <th className="col-stat">PLD</th>
+                    <th className="col-stat">W</th>
+                    <th className="col-stat">D</th>
+                    <th className="col-stat">L</th>
                     <th className="col-stat">GD</th>
                     <th className="col-stat">GF</th>
                     <th className="col-stat col-pts">Pts</th>
@@ -40,6 +46,9 @@ function LeagueTable({table} : LeagueTableProps){
                         </td>
                         <td className="col-player text-left">{player.playerName}</td>
                         <td className="col-stat numeric-data">{player.totalPlayed}</td>
+                        <td className="col-stat numeric-data">{player.totalW}</td>
+                        <td className="col-stat numeric-data">{player.totalD}</td>
+                        <td className="col-stat numeric-data">{player.totalL}</td>
                         <td className="col-stat numeric-data">{player.totalGD}</td>
                         <td className="col-stat numeric-data">{player.totalGF}</td>
                         <td className="col-stat col-pts total-pts-cell">{player.totalPoints}</td>

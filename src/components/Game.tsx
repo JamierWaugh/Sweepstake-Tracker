@@ -1,5 +1,3 @@
-import getOwnerByTeam from "../utils/GetOwnerByTeamHelper"
-import sweepstake from "../data/sweepstake.json"
 import parseScorersString from "../utils/ParseScorersStringHelper"
 import "./Game.css"; 
 
@@ -20,6 +18,9 @@ export interface CleanedGame{
     stadiumCity: string,
     group: string,
     parsedDate: {date: Date, display:string},
+    homeTeamOwner: string,
+    awayTeamOwner: string,
+    isLive: boolean
 }
 
 
@@ -29,13 +30,6 @@ interface GameProps {
 }
 
 function Game({gameParsed}: GameProps){
-    const homeTeamOwner = getOwnerByTeam(sweepstake, gameParsed.homeTeamId)?.[1] || "No Owner";
-    const awayTeamOwner = getOwnerByTeam(sweepstake, gameParsed.awayTeamId)?.[1] || "No Owner";
-    
-
-    //Return a bool for whether the game is live or not
-    const isLive = gameParsed.timeElapsed !== "notstarted" && gameParsed.timeElapsed !== "finished"; 
-
     //Parse raw strings into arrays of clean lines
     const homeScorersList = parseScorersString(gameParsed.homeScorers);
     const awayScorersList = parseScorersString(gameParsed.awayScorers);
@@ -44,14 +38,14 @@ function Game({gameParsed}: GameProps){
     return (
         <li className="card">
         <div className="header">
-            <span className="group-badge"> GROUP {gameParsed.group}</span>
-            <span className="date-text"> KICKOFF {gameParsed.parsedDate.display}</span>
+            <span className="group-badge"> {gameParsed.group}</span>
+            <span className="date-text"> {gameParsed.parsedDate.display}</span>
         </div>
 
         <div className="scoreboard">
             {/* Home Team */}
             <div className="team-cluster-left">
-                <span className="owner-text"> {homeTeamOwner}</span>
+                <span className="owner-text"> {gameParsed.homeTeamOwner}</span>
                 <span className="team-name"> {gameParsed.homeTeamName} </span>
             </div>
 
@@ -59,8 +53,8 @@ function Game({gameParsed}: GameProps){
             <div className="center-section"> 
                 <span className="score"> {gameParsed.homeScore} </span>
                 <div className="status-wrapper">
-                {isLive ? (
-                    <span className="live-badge"> LIVE {gameParsed.timeElapsed} </span>
+                {gameParsed.isLive ? (
+                    <span className="live-badge"> LIVE </span>
                 ) : gameParsed.isFinished === true ? (
                     <span className="ft-badge"> FT </span>
                 ) : (
@@ -72,7 +66,7 @@ function Game({gameParsed}: GameProps){
 
             {/*Away Team */}
             <div className="team-cluster-right">
-                <span className="owner-text">  {awayTeamOwner} </span>
+                <span className="owner-text">  {gameParsed.awayTeamOwner} </span>
                 <span className="team-name"> {gameParsed.awayTeamName} </span>
             </div>  
         </div>
