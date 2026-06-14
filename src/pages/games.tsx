@@ -1,5 +1,6 @@
 import Game, { type CleanedGame } from "../components/Game.tsx"
 import {useState, useEffect } from 'react';
+import parseLocalDateToUKDate from "../utils/ParseLocalToUKHelper"
 
 async function fetchGameDisplay(){
     const [gameResponse, stadiumResponse] = await Promise.all([
@@ -36,19 +37,25 @@ async function fetchGameDisplay(){
             stadiumRegion: stadiumLookup[game.stadium_id].region,
             stadiumCity: stadiumLookup[game.stadium_id].city,
             group: game.group,
-            localDate: game.local_date 
+            parsedDate: parseLocalDateToUKDate(stadiumLookup[game.stadium_id].region, game.local_date)
         }))
         .sort((a: any, b: any) => {
-            return new Date(a.localDate).getTime() - new Date(b.localDate).getTime();
+            return a.parsedDate.date.getTime() - b.parsedDate.date.getTime();
         })
         const recent = cleanGames
             .filter((game: any) => game.isFinished)
             .reverse()
-            .slice(0,2)
+            .slice(0,4)
             .reverse();
-        const upcoming = cleanGames
+        let upcoming = cleanGames
             .filter((game: any) => !game.isFinished)
-            .slice(0,5);
+        if (upcoming.length < 8 ){
+            upcoming = upcoming.slice(0,upcoming.length);
+        } else{
+            upcoming = upcoming.slice(0,8);
+        }
+            
+        
         
         const combinedTimeLine = [...recent, ...upcoming]; //... is a spread operation to unpack an array or object
 
@@ -64,8 +71,8 @@ function Games(){
     useEffect(() => {
         async function loadData(){
             try {
-                const nextFive = await fetchGameDisplay();
-                setGames(nextFive);
+                const nextGames = await fetchGameDisplay();
+                setGames(nextGames);
             } catch (error){
                 console.error("Error loading matches:", error);
             } finally {

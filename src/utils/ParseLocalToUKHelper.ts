@@ -1,8 +1,8 @@
-function parseLocalToUKDate(region: string ,dateStr: string) : string{
-    if (!dateStr) return "TBD";
+function parseLocalToUKDate(region: string ,dateStr: string) : {date: Date | null; display: string}{
+    if (!dateStr) return {date: null, display: "TBD"};
     try {
         const [datePart, timePart] = dateStr.split(" ");
-        if (!datePart || !timePart) return dateStr;
+        if (!datePart || !timePart) return {date:null, display: dateStr};
 
         const [month, day, year] = datePart.split("/");
         const [hours, minutes] = timePart.split(":");
@@ -23,7 +23,7 @@ function parseLocalToUKDate(region: string ,dateStr: string) : string{
 
         matchDate.setHours(matchDate.getHours() + hoursToAdd);
 
-        return new Intl.DateTimeFormat("en-GB", {
+        const display = new Intl.DateTimeFormat("en-GB", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -31,9 +31,11 @@ function parseLocalToUKDate(region: string ,dateStr: string) : string{
             minute: "2-digit",
             hour12: false,
         }).format(matchDate)
+
+        return {date: matchDate, display};
     } catch (error){
         console.error("Failed converting time to UK format:", error);
-        return dateStr;
+        return {date: null, display: dateStr};
     }
 }
 

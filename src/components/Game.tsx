@@ -1,6 +1,5 @@
 import getOwnerByTeam from "../utils/GetOwnerByTeamHelper"
 import sweepstake from "../data/sweepstake.json"
-import parseLocalDateToUKDate from "../utils/ParseLocalToUKHelper"
 import parseScorersString from "../utils/ParseScorersStringHelper"
 import "./Game.css"; 
 
@@ -20,7 +19,7 @@ export interface CleanedGame{
     stadiumRegion: string,
     stadiumCity: string,
     group: string,
-    localDate: string,
+    parsedDate: {date: Date, display:string},
 }
 
 
@@ -32,7 +31,7 @@ interface GameProps {
 function Game({gameParsed}: GameProps){
     const homeTeamOwner = getOwnerByTeam(sweepstake, gameParsed.homeTeamId)?.[1] || "No Owner";
     const awayTeamOwner = getOwnerByTeam(sweepstake, gameParsed.awayTeamId)?.[1] || "No Owner";
-    const parsedDate = parseLocalDateToUKDate(gameParsed.stadiumRegion, gameParsed.localDate);
+    
 
     //Return a bool for whether the game is live or not
     const isLive = gameParsed.timeElapsed !== "notstarted" && gameParsed.timeElapsed !== "finished"; 
@@ -46,7 +45,7 @@ function Game({gameParsed}: GameProps){
         <li className="card">
         <div className="header">
             <span className="group-badge"> GROUP {gameParsed.group}</span>
-            <span className="date-text"> KICKOFF {parsedDate}</span>
+            <span className="date-text"> KICKOFF {gameParsed.parsedDate.display}</span>
         </div>
 
         <div className="scoreboard">
