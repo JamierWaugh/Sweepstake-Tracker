@@ -3,14 +3,13 @@ import {useState, useEffect } from 'react';
 import parseLocalDateToUKDate from "../utils/ParseLocalToUKHelper"
 import sweepstake from "../data/sweepstake.json";
 import getOwnerByTeam from "../utils/GetOwnerByTeamHelper"
+import fetchWithRetry from "../utils/FetchWithRetryHelper";
 
 export async function fetchGameDisplay(){
-    const [gameResponse, stadiumResponse] = await Promise.all([
-        fetch("https://worldcup26.ir/get/games"),
-        fetch("https://worldcup26.ir/get/stadiums")
+    const [gameData, stadiumData] = await Promise.all([
+        fetchWithRetry<any>("https://worldcup26.ir/get/games"),
+        fetchWithRetry<any>("https://worldcup26.ir/get/stadiums")
     ]);
-    const gameData = await gameResponse.json();
-    const stadiumData = await stadiumResponse.json();
 
     //Look up stadium data
     const stadiumLookup: Record<string, {name: string; region: string, city: string}> = {};

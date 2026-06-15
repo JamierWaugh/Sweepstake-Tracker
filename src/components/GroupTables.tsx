@@ -1,6 +1,7 @@
 import {useState, useEffect } from 'react';
 import enrichStandings, {type EnrichedStandingRows} from "../utils/EnrichStandingsHelper.tsx";
 import "./GroupTables.css";
+import fetchWithRetry from "../utils/FetchWithRetryHelper";
 
 interface GroupTables{
     group: string,
@@ -15,8 +16,7 @@ function GroupTables({group, sweepstake} : GroupTables){
     //Enrich standings for the whole group
     useEffect(() => {
         async function fetchStandings() {
-            const response = await fetch(`https://worldcup26.ir/get/group?name=${group}`);
-            const groupStandings = await response.json();
+            const groupStandings = await fetchWithRetry<any>(`https://worldcup26.ir/get/group?name=${group}`);
             const enriched = enrichStandings(groupStandings.group, sweepstake);
 
             if (enriched && enriched.teams){

@@ -119,7 +119,7 @@ function Bracket(){
                             <td rowSpan={16}>
                                 <div className="game-card-wrapper">
                                     <MiniGame gameParsed={alignedFinals[0]}/>
-                                    <td></td>
+                                    <div></div>
                                     <MiniGame gameParsed={alignedFinals[1]}/>
                                 </div>
                             </td>
@@ -130,57 +130,7 @@ function Bracket(){
             </table>
         </div>
         </div>
-        )
-        {/* <div className="bracket-wrapper">
-            <div className="round-column">
-                <h3 className="round-title">Round of 32</h3>
-                {alignedR32.map((game) => (
-                    <div key={game.id}>
-                        <Game gameParsed={game} />
-                    </div>
-                ))}
-            </div>
-            {/* TODO: Implement spacing that actually makes it look like a bracket
-            <div className="round-column">
-                <h3 className="round-title">Round of 16</h3>
-                {alignedR16.map((game) => (
-                    <div key={game.id}>
-                        <Game gameParsed={game} />
-                    </div>
-                ))}
-            </div>
-
-            <div className="round-column">
-                <h3 className="round-title">Quarter Finals</h3>
-                {alignedQF.map((game) => (
-                    <div key={game.id}>
-                        <Game gameParsed={game} />
-                    </div>
-                ))}
-            </div>
-
-            <div className="round-column">
-                <h3 className="round-title">Semi Finals</h3>
-                {alignedSF.map((game) => (
-                    <div key={game.id}>
-                        <Game gameParsed={game} />
-                    </div>
-                ))}
-            </div>
-
-            <div className="round-column">
-                <h3 className="round-title">Finals</h3>
-                {alignedFinals.map((game) => (
-                    <div key={game.id}>
-                        <Game gameParsed={game} />
-                    </div>
-                ))}
-            </div>
-            
-        </div>
-    
-    );
-    */}
+        );
 }
 
 export default Bracket;

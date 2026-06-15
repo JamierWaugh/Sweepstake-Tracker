@@ -4,6 +4,7 @@ import LeagueTable, {type PlayerRow} from "../components/LeagueTable.tsx";
 import getOwnerByTeam from "../utils/GetOwnerByTeamHelper";
 import updateOwnerLookup from "../utils/UpdateOwnerLookupHelper";
 import initiateOwnerLookup, {ownerLookup} from "../utils/InitiateOwnerLookupHelper";
+import fetchWithRetry from "../utils/FetchWithRetryHelper";
 
 function League(){
     const [leagueTableData, setLeagueTableData] = useState<PlayerRow[]>([]);
@@ -12,8 +13,7 @@ function League(){
     useEffect(() => {
         async function calculateLeagueTable() {
             try {
-                const response = await fetch(`https://worldcup26.ir/get/games`);
-                const data = await response.json();
+                const data = await fetchWithRetry<any>(`https://worldcup26.ir/get/games`);
 
                 initiateOwnerLookup();
                 
