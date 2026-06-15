@@ -1,50 +1,46 @@
-/* --- Master Horizontal Canvas --- */
-.bracket-wrapper {
-  display: flex;
-  overflow-x: auto;
-  gap: 3rem; /* Clean horizontal channel space between your round columns */
-  padding: 4rem 2rem;
+/* --- Viewport Breakout Canvas Wrapper --- */
+.bracket-scroll-area {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  
+  overflow-x: auto; 
   background-color: #0b0f19;
-  min-height: 100vh;
-  align-items: flex-start; /* Aligns all column headers neatly to the top track */
+  
+  /* --- THE NAVBAR VERTICAL GAP FIX ---
+     Slashed the top padding from 3rem down to 0.75rem. This pulls 
+     the entire table and its column headers tight against the navbar. */
+  padding: 0.75rem 0 2rem 0; 
+  
+  box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
 }
 
-/* --- Clean, Independent Descending Columns --- */
-.round-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0px; /* Let your cards rely entirely on their native margin-bottom from game.css */
+/* --- The Table Grid Track Engine --- */
+.bracket-table {
+  border-collapse: collapse;
   width: max-content;
-  min-width: 240px; /* Safe minimum width to prevent text squishing */
-  flex-shrink: 0;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.round-title {
+.bracket-table th {
   text-align: center;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #64748b;
   font-weight: 700;
-  margin-bottom: 1rem; /* Clean breathing room below the round name */
+  min-width: 210px; 
+  
+  /* Tightened space between column header text and the first row of cards */
+  padding-bottom: 1rem; 
 }
 
-/* --- The Pure Card Wrapper --- */
-.game-card-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-/* Typography Protection Engine */
-.game-card-wrapper * {
-  white-space: nowrap !important; /* Ensures team text lines stay clean and unbroken */
-}
-
-/* 📱 MOBILE VIEW COMPACTNESS OVERRIDES */
-@media screen and (max-width: 480px) {
-  .bracket-wrapper {
-    gap: 1.5rem;
-    padding: 3rem 1rem;
-  }
+.bracket-table td {
+  padding: 0.4rem 0.2rem; 
+  vertical-align: middle;
 }

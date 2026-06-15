@@ -25,7 +25,7 @@ export interface CleanedGame{
 
 
 
-interface GameProps {
+export interface GameProps {
     gameParsed: CleanedGame;
 }
 

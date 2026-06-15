@@ -1,0 +1,153 @@
+/* --- Ultra-Compact Mini Card Node --- */
+.mini-card-box {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem; /* Tightened padding */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid #2e2e2e;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* RIGID BOX DIMENSIONS */
+  width: 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem; /* Reduced gap between the header row and scoreboard */
+  margin: 0 auto;
+}
+
+/* --- Tiny Header Row --- */
+.mini-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2e2e2e;
+  padding-bottom: 0.15rem;
+}
+
+.mini-card-box .group-badge {
+  background-color: #2a6bf2;
+  color: #ffffff;
+  padding: 0px 4px;
+  border-radius: 4px;
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+
+.mini-card-box .date-text {
+  font-size: 0.55rem;
+  color: #aaaaaa;
+}
+
+/* --- Fixed Width Scoreboard Layout --- */
+.mini-card-box .scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 0.2rem;
+  
+  /* THE VERTICAL SPACE FIX: 
+     Forcibly strips out any inherited or native vertical margins 
+     to bring the scores right up flush beneath the top header row. */
+  margin: 0 !important; 
+  padding: 0.15rem 0 0;
+}
+
+/* BALANCED TEAM SIZES: 
+   Adjusted slightly down to 56px to open up horizontal clearance 
+   for the central tracking numbers. */
+.mini-card-box .team-cluster-left,
+.mini-card-box .team-cluster-right {
+  display: flex;
+  flex-direction: column;
+  width: 56px; 
+  box-sizing: border-box;
+}
+
+.mini-card-box .team-cluster-left { text-align: left; }
+.mini-card-box .team-cluster-right { text-align: right; align-items: flex-end; }
+
+/* THE COMPACT TEXT ENGINE */
+.mini-card-box .team-name {
+  font-size: 0.65rem; /* Sized up from 0.4rem so it's actually readable on laptop displays */
+  font-weight: bold;
+  color: #ffffff;
+  white-space: normal !important; 
+  word-break: break-word;
+  line-height: 1.1;
+}
+
+.mini-card-box .owner-text {
+  font-size: 0.55rem; /* Proportional text reduction */
+  color: #00ca72;
+  font-weight: 500;
+  white-space: normal !important;
+  word-break: break-word;
+  line-height: 1.1;
+}
+
+/* --- THE SCORE RUNWAY OVERHAUL ---
+   Widening this center track keeps your numbers and badges inside their own 
+   dedicated visual zone so they never collide with the team clusters. */
+.mini-card-box .center-section {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 64px; /* Expanded to safely contain both scores and status badges on one plane */
+  gap: 0.2rem;
+  box-sizing: border-box;
+}
+
+.mini-card-box .score-left {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #ffffff;
+  width: 12px; /* Expanded from 2px so digits don't overflow sideways into team columns */
+  text-align: left;
+  margin-right: -40%;
+}
+.mini-card-box .score-right {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #ffffff;
+  width: 12px; /* Expanded from 2px so digits don't overflow sideways into team columns */
+  text-align: right;
+  margin-left: -40%;
+}
+
+
+
+.mini-card-box .status-wrapper {
+  width: 28px; /* Safe, fixed channel width for the badges */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Interactive Status Badges --- */
+.mini-card-box .live-badge {
+  background-color: #e53935;
+  padding: 1px 3px;
+  border-radius: 10px;
+  font-size: 0.45rem;
+  font-weight: bold;
+}
+
+.mini-card-box .ft-badge {
+  background-color: #3a3a3a;
+  color: #b0b0b0;
+  padding: 1px 3px;
+  border-radius: 4px;
+  font-size: 0.45rem;
+  font-weight: bold;
+}
+
+.mini-card-box .vs-badge {
+  color: #666666;
+  font-size: 0.55rem;
+  font-weight: bold;
+}

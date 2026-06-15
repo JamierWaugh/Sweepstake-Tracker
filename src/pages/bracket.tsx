@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import { fetchGameDisplay } from "./games"
-import Game, { type CleanedGame } from "../components/Game.tsx"
-import "../components/Game.css" //Not taking Bracket.css for now, not functional for the bracket
+import { type CleanedGame } from "../components/Game.tsx"
+import MiniGame from "../components/MiniGame.tsx"
+import "../components/Bracket.css" //Not taking Bracket.css for now, not functional for the bracket
 
 interface GroupedBracket {
     r32: CleanedGame[];
@@ -33,7 +34,7 @@ function Bracket(){
                     r16: cleanGames.filter((g: any) => g.group === "R16"),
                     qf: cleanGames.filter((g: any) => g.group === "QF"),
                     sf: cleanGames.filter((g: any) => g.group === "SF"),
-                    finals: cleanGames.filter((g: any) => g.group === "FINAL"),
+                    finals: cleanGames.filter((g: any) => g.group === "FINAL" || g.group === "3RD"),
                 };
 
                 setTournamentData(groupedRounds);
@@ -56,7 +57,7 @@ function Bracket(){
         r16: ["89", "90", "93", "94", "91", "92", "95", "96"],
         qf:  ["97", "98", "99", "100"],
         sf:  ["101", "102"],
-        finals: ["104"] // Grand Final on top, Third Place on bottom
+        finals: ["104", "103"] // Grand Final on top, Third Place on bottom
     };
 
     //Helper to rearrange games into static bracket tree slots
@@ -73,7 +74,64 @@ function Bracket(){
     const alignedFinals = alignMatchesForTree(tournamentData.finals, LAYOUT_ORDERS.finals);
 
     return (
-        <div className="bracket-wrapper">
+        <div className="page-container">
+            <div className="bracket-scroll-area"> 
+            <table className="bracket-table"> 
+                <thead>
+                    <tr>
+                        <th> R32 </th>
+                        <th> R16 </th>
+                        <th> QF </th>
+                        <th> SF </th>
+                        <th> FINAL </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {alignedR32.map((game, idx) => (
+                        <tr key={game.id}>
+                            <td>
+                                <div className="game-card-wrapper"> 
+                                    <MiniGame gameParsed={game}/> 
+                                </div>
+                            </td>
+                            {idx % 2 == 0 && alignedR16[idx / 2] && (
+                                <td rowSpan={2}>  
+                                    <div className="game-card-wrapper">
+                                        <MiniGame gameParsed={alignedR16[idx / 2]} />  
+                                    </div>
+                                </td>
+                            )}
+                            {idx % 4 === 0 && alignedQF[idx / 4] && (
+                            <td rowSpan={4}>
+                                <div className="game-card-wrapper">
+                                    <MiniGame gameParsed={alignedQF[idx / 4]} />
+                                </div>
+                            </td>
+                        )}
+                        {idx % 8 === 0 && alignedSF[idx / 8] && (
+                            <td rowSpan={8}>
+                                <div className="game-card-wrapper">
+                                    <MiniGame gameParsed={alignedSF[idx / 8]} />
+                                </div>
+                            </td>
+                        )}
+                        {idx % 16 === 0 && alignedFinals[idx / 16] && (
+                            <td rowSpan={16}>
+                                <div className="game-card-wrapper">
+                                    <MiniGame gameParsed={alignedFinals[0]}/>
+                                    <td></td>
+                                    <MiniGame gameParsed={alignedFinals[1]}/>
+                                </div>
+                            </td>
+                        )}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        )
+        {/* <div className="bracket-wrapper">
             <div className="round-column">
                 <h3 className="round-title">Round of 32</h3>
                 {alignedR32.map((game) => (
@@ -82,7 +140,7 @@ function Bracket(){
                     </div>
                 ))}
             </div>
-            {/* TODO: Implement spacing that actually makes it look like a bracket */}
+            {/* TODO: Implement spacing that actually makes it look like a bracket
             <div className="round-column">
                 <h3 className="round-title">Round of 16</h3>
                 {alignedR16.map((game) => (
@@ -120,7 +178,9 @@ function Bracket(){
             </div>
             
         </div>
+    
     );
+    */}
 }
 
 export default Bracket;
