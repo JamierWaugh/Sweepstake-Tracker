@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
-import Home from "./pages/home";
+import Create from "./pages/create";
+import Teams from "./pages/teams";
 import Groups from "./pages/groups";
 import Games from "./pages/games";
 import League from "./pages/league";
@@ -19,7 +20,8 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Create />}/>
+        <Route path="/teams" element={<Teams />}/>
         <Route path="/groups" element={<Groups />}/>
         <Route path="/games" element={<Games />}/>
         <Route path="/league" element={<League />}/>

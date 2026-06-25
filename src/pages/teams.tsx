@@ -1,6 +1,6 @@
 import OwnerMember from '../components/SweepstakeMember.tsx';
 import sweepstake from "../data/sweepstake.json";
-function Home(){
+function Teams(){
 
     const ownerNames = Object.keys(sweepstake);
     return (
@@ -18,4 +18,4 @@ function Home(){
     )
 }
 
-export default Home;
+export default Teams;
