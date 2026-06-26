@@ -70,8 +70,8 @@ function GroupTables({group, sweepstake} : GroupTables){
                         <td data-label="Team">{row.team_name}</td>
                         <td data-label="MP">{row.mp}</td>
                         <td data-label="Won">{row.w}</td>
-                        <td data-label="Drawn">{row.d}</td>
                         <td data-label="Lost">{row.l}</td>
+                        <td data-label="Drawn">{row.d}</td>
                         <td data-label="GF">{row.gf}</td>
                         <td data-label="GA">{row.ga}</td>
                         <td data-label="GD">{row.gd}</td>
